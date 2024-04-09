@@ -1,4 +1,4 @@
-package com.mikeypants.thegoodbush.item.types;
+package com.mikeypants.thegoodbush.item.registries;
 
 import com.mikeypants.thegoodbush.lib.tuples.ItemTuple3;
 import net.minecraft.world.item.Item;

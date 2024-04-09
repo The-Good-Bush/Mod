@@ -28,4 +28,17 @@ public class ModItemModels extends ItemModelProvider {
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(Main.MODID, "item/" + item.getId().getPath()));
     }
+    private ItemModelBuilder twoLayersItem(RegistryObject<Item> item){
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated"))
+                .texture("layer0", new ResourceLocation(Main.MODID, "item/" + item.getId().getPath() + "0"))
+                .texture("layer1", new ResourceLocation(Main.MODID, "item/" + item.getId().getPath() + "1"));
+    }
+    private ItemModelBuilder threeLayersItem(RegistryObject<Item> item){
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated"))
+                .texture("layer0", new ResourceLocation(Main.MODID, "item/" + item.getId().getPath() + "0"))
+                .texture("layer1", new ResourceLocation(Main.MODID, "item/" + item.getId().getPath() + "1"))
+                .texture("layer2", new ResourceLocation(Main.MODID, "item/" + item.getId().getPath() + "2"));
+    }
 }

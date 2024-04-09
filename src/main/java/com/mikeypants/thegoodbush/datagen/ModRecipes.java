@@ -1,11 +1,10 @@
 package com.mikeypants.thegoodbush.datagen;
 
 import com.mikeypants.thegoodbush.Main;
+import com.mikeypants.thegoodbush.item.ModItems;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.*;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -23,7 +22,22 @@ public class ModRecipes extends RecipeProvider implements IConditionBuilder {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
-        
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MASON_JAR.get(), 3)
+                .pattern("GCG")
+                .pattern("G G")
+                .pattern("GGG")
+                .define('C', Items.COPPER_INGOT.asItem())
+                .define('G', Items.GLASS.asItem())
+                .unlockedBy(getHasName(Items.COPPER_INGOT.asItem()), has(Items.COPPER_INGOT.asItem()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.WEED_BAGGIE.get(), 6)
+                .pattern(" S ")
+                .pattern("P P")
+                .pattern("PPP")
+                .define('S', Items.SLIME_BALL.asItem())
+                .define('P', Items.PAPER.asItem())
+                .unlockedBy(getHasName(Items.COPPER_INGOT.asItem()), has(Items.COPPER_INGOT.asItem()))
+                .save(consumer);
     }
 
 

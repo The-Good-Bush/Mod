@@ -1,14 +1,16 @@
 package com.mikeypants.thegoodbush.item;
 
 import com.mikeypants.thegoodbush.Main;
+import com.mikeypants.thegoodbush.item.types.SealedContainer;
 import com.mikeypants.thegoodbush.lib.tuples.ItemTuple3;
+import net.minecraft.world.item.BundleItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import static com.mikeypants.thegoodbush.item.types.CannabisRegistry.registerCannabisType;
+import static com.mikeypants.thegoodbush.item.registries.CannabisRegistry.registerCannabisType;
 
 public class ModItems {
     public static final DeferredRegister<Item> SIMPLEITEMS =
@@ -17,6 +19,14 @@ public class ModItems {
         SIMPLEITEMS.register(eventBus);
     }
 
+    // Products
+
+    public static final RegistryObject<Item> MASON_JAR = SIMPLEITEMS.register("mason_jar",
+            () -> new SealedContainer(new Item.Properties()));
+    public static final RegistryObject<Item> WEED_BAGGIE = SIMPLEITEMS.register("weed_baggie",
+            () -> new SealedContainer(new Item.Properties()));
+
+    // Cannabis Plants
     public static final ItemTuple3 INDICA = registerCannabisType("indica");
 
     public static final RegistryObject<Item>
