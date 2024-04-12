@@ -19,8 +19,8 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, Main.MODID);
 
-    public static final RegistryObject<Block> TEST_BLOCK = registerBlock("test_block",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK)));
+    /*public static final RegistryObject<Block> TEST_BLOCK = registerBlock("test_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK)));*/
     public static final RegistryObject<Block> INDICA_CANNABIS_PLANT = registerBlock("indica_cannabis_plant",
             () -> new IndicaCannabisCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noOcclusion().noCollission()));
 
