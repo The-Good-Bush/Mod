@@ -23,15 +23,18 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     @Override
     protected void generate() {
 
-        this.add(ModBlocks.INDICA_CANNABIS_PLANT.get(), createCropDrops(ModBlocks.INDICA_CANNABIS_PLANT.get(),
-                ModItems.INDICA_SEED.get(), ModItems.INDICA_LEAF.get(),  CannabisPlantDrops(ModBlocks.INDICA_CANNABIS_PLANT.get(), IndicaCannabisCropBlock.AGE, 7)));
 
         this.add(ModBlocks.INDICA_CANNABIS_PLANT.get(), createCropDrops(ModBlocks.INDICA_CANNABIS_PLANT.get(),
-                ModItems.INDICA_SEED.get(), ModItems.INDICA_BUD.get(), CannabisPlantDrops(ModBlocks.INDICA_CANNABIS_PLANT.get(), IndicaCannabisCropBlock.AGE, 6)));
+                ModItems.INDICA_SEED.get(), ModItems.INDICA_LEAF.get(),
+                PlantDrops(ModBlocks.INDICA_CANNABIS_PLANT.get(), IndicaCannabisCropBlock.AGE, 7)));
+
+        this.add(ModBlocks.INDICA_CANNABIS_PLANT.get(), createCropDrops(ModBlocks.INDICA_CANNABIS_PLANT.get(),
+                ModItems.INDICA_SEED.get(), ModItems.INDICA_BUD.get(),
+                PlantDrops(ModBlocks.INDICA_CANNABIS_PLANT.get(), IndicaCannabisCropBlock.AGE, 6)));
 
     }
 
-    protected LootItemCondition.Builder CannabisPlantDrops(Block block, IntegerProperty age, int dropAge){
+    protected LootItemCondition.Builder PlantDrops(Block block, IntegerProperty age, int dropAge){
         return  LootItemBlockStatePropertyCondition
                 .hasBlockStateProperties(block)
                 .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(age, dropAge));
