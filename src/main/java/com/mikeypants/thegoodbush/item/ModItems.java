@@ -3,7 +3,6 @@ package com.mikeypants.thegoodbush.item;
 import com.mikeypants.thegoodbush.Main;
 import com.mikeypants.thegoodbush.item.types.SealedContainer;
 import com.mikeypants.thegoodbush.lib.tuples.ItemTuple3;
-import net.minecraft.world.item.BundleItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraft.world.item.Item;
