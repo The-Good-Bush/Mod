@@ -16,7 +16,7 @@ public class CannabisRegistry {
     }
     // Empty Items
     public static ItemTuple3 registerCannabisType(String name){
-        var a = SIMPLEITEMS.register(name+ "_cannabis_seed", () -> new Item(new Item.Properties()));
+        var a = SIMPLEITEMS.register(name+ "_cannabis_seeds", () -> new Item(new Item.Properties()));
         var b = SIMPLEITEMS.register(name + "_cannabis_leaf", () -> new Item(new Item.Properties()));
         var c = SIMPLEITEMS.register(name + "_cannabis_bud", () -> new Item(new Item.Properties()));
 
