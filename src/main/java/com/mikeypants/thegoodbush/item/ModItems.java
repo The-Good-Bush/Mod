@@ -15,15 +15,18 @@ import static com.mikeypants.thegoodbush.item.registries.CannabisRegistry.regist
 public class ModItems {
     public static final DeferredRegister<Item> SIMPLEITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, Main.MODID);
+    public static final DeferredRegister<Item> LAYEREDITEMS =
+            DeferredRegister.create(ForgeRegistries.ITEMS, Main.MODID);
     public static void register(IEventBus eventBus) {
         SIMPLEITEMS.register(eventBus);
+        LAYEREDITEMS.register(eventBus);
     }
 
     // Products
 
-    public static final RegistryObject<Item> MASON_JAR = SIMPLEITEMS.register("mason_jar",
+    public static final RegistryObject<Item> MASON_JAR = LAYEREDITEMS.register("mason_jar",
             () -> new SealedContainer(new Item.Properties()));
-    public static final RegistryObject<Item> WEED_BAGGIE = SIMPLEITEMS.register("weed_baggie",
+    public static final RegistryObject<Item> WEED_BAGGIE = LAYEREDITEMS.register("weed_baggie",
             () -> new SealedContainer(new Item.Properties()));
 
     // Cannabis Plants
