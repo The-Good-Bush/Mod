@@ -2,6 +2,7 @@ package com.mikeypants.thegoodbush.item;
 
 import com.mikeypants.thegoodbush.Main;
 import com.mikeypants.thegoodbush.item.types.SealedContainer;
+import com.mikeypants.thegoodbush.item.types.UnSealedContainer;
 import com.mikeypants.thegoodbush.lib.tuples.ItemTuple3;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -24,8 +25,12 @@ public class ModItems {
     // Products
 
     public static final RegistryObject<Item> MASON_JAR = LAYEREDITEMS.register("mason_jar",
+            () -> new UnSealedContainer(new Item.Properties()));
+    public static final RegistryObject<Item> SEALED_MASON_JAR = LAYEREDITEMS.register("sealed_mason_jar",
             () -> new SealedContainer(new Item.Properties()));
     public static final RegistryObject<Item> WEED_BAGGIE = LAYEREDITEMS.register("weed_baggie",
+            () -> new UnSealedContainer(new Item.Properties()));
+    public static final RegistryObject<Item> SEALED_WEED_BAGGIE = LAYEREDITEMS.register("sealed_weed_baggie",
             () -> new SealedContainer(new Item.Properties()));
 
     // Cannabis Plants
