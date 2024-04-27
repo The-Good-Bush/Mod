@@ -1,5 +1,6 @@
 package com.mikeypants.thegoodbush;
 
+import com.mikeypants.thegoodbush.item.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -21,14 +22,14 @@ public class CreativeTab {
             // Set name of tab to display
             .title(Component.translatable("item_group." + Main.MODID + ".creativetab"))
             // Set icon of creative tab
-            .icon(() -> new ItemStack(INDICA_BUD.get()))
+            .icon(() -> new ItemStack(INDICA_LEAF.get()))
             // Add default items to tab
             .displayItems((params, output) -> {
 
                 for(RegistryObject<Item> item : SIMPLEITEMS.getEntries())
                     output.accept(item.get());
-                for(RegistryObject<Block> block : BLOCKS.getEntries())
-                    output.accept(block.get());
+//                for(RegistryObject<Block> block : BLOCKS.getEntries())
+//                    output.accept(block.get());
             })
             .build()
     );
