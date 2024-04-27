@@ -6,8 +6,10 @@ import com.mikeypants.thegoodbush.item.ModItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.registries.RegistryObject;
@@ -22,17 +24,12 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-
-
+        // Indica Cannabis LootTable
         this.add(ModBlocks.INDICA_CANNABIS_PLANT.get(), createCropDrops(ModBlocks.INDICA_CANNABIS_PLANT.get(),
-                ModItems.INDICA_SEED.get(), ModItems.INDICA_LEAF.get(),
-                PlantDrops(ModBlocks.INDICA_CANNABIS_PLANT.get(), IndicaCannabisCropBlock.AGE, 7)));
-
-        this.add(ModBlocks.INDICA_CANNABIS_PLANT.get(), createCropDrops(ModBlocks.INDICA_CANNABIS_PLANT.get(),
-                ModItems.INDICA_SEED.get(), ModItems.INDICA_BUD.get(),
-                PlantDrops(ModBlocks.INDICA_CANNABIS_PLANT.get(), IndicaCannabisCropBlock.AGE, 6)));
-
+                ModItems.INDICA_SEED.get(), ModItems.INDICA_STEM.get(),
+                PlantDrops(ModBlocks.INDICA_CANNABIS_PLANT.get(), IndicaCannabisCropBlock.AGE, 8)));
     }
+
 
     protected LootItemCondition.Builder PlantDrops(Block block, IntegerProperty age, int dropAge){
         return  LootItemBlockStatePropertyCondition

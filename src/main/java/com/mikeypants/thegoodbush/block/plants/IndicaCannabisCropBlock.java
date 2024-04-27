@@ -4,6 +4,7 @@ import com.mikeypants.thegoodbush.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
@@ -21,23 +22,25 @@ import net.minecraftforge.common.IPlantable;
 
 public class IndicaCannabisCropBlock extends CropBlock {
 
-    public static final int BOTTOM_MAX_AGE = 6;
+    public static final int BOTTOM_MAX_AGE = 7;
     public static final int TOP_MAX_AGE = 1;
 
+    // <editor-fold desc="Voxel Shapes - Colliders">
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D),
+            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 3.5D, 16.0D),
+            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 5.0D, 16.0D),
+            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.5D, 16.0D),
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D),
+            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 9.5D, 16.0D),
+            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 11.0D, 16.0D),
+            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 13.0D, 16.0D),
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)
+            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D)
     };
+    // </editor-fold>
 
-
-    public static final IntegerProperty AGE = IntegerProperty.create("age", 0,8);
+    public static final IntegerProperty AGE = IntegerProperty.create("age", 0,BOTTOM_MAX_AGE + TOP_MAX_AGE);
 
     public IndicaCannabisCropBlock(Properties properties) {
         super(properties);
@@ -58,10 +61,12 @@ public class IndicaCannabisCropBlock extends CropBlock {
 
                 if(net.minecraftforge.common.ForgeHooks.onCropsGrowPre(pLevel, pPos, pState,
                         pRandom.nextInt((int)(25.0f / growthSpeed) + 1) == 0)){
-                    if(currentAge == BOTTOM_MAX_AGE) {
+                    if(currentAge >= BOTTOM_MAX_AGE) {
                         if (pLevel.getBlockState(pPos.above(1)).is(Blocks.AIR))
                             pLevel.setBlock(pPos.above(1), this.getStateForAge(currentAge + 1), 2); // Second Level Growth
-                    }else pLevel.setBlock(pPos, this.getStateForAge(currentAge + 1), 2); // First Level Growth
+                    }
+                    else
+                        pLevel.setBlock(pPos, this.getStateForAge(currentAge + 1), 2); // First Level Growth
 
                     net.minecraftforge.common.ForgeHooks.onCropsGrowPost(pLevel, pPos, pState);
                 }
@@ -83,17 +88,17 @@ public class IndicaCannabisCropBlock extends CropBlock {
 
     @Override
     public void growCrops(Level pLevel, BlockPos pPos, BlockState pState) {
-        int nextAge = this.getAge(pState) + this.getBonemealAgeIncrease(pLevel);
-        int maxAge = this.getMaxAge();
-        if(maxAge > nextAge) {
-            nextAge = maxAge;
-        }
+        int nextAge = Math.min((this.getAge(pState) + this.getBonemealAgeIncrease(pLevel)), this.getMaxAge());
 
-        if(this.getAge(pState) == BOTTOM_MAX_AGE && pLevel.getBlockState(pPos.above(1)).is(Blocks.AIR)){
+        if(this.getAge(pState) >= BOTTOM_MAX_AGE && pLevel.getBlockState(pPos.above(1)).is(Blocks.AIR))
             pLevel.setBlock(pPos.above(1), this.getStateForAge(nextAge), 2);
-        }else {
+        else
             pLevel.setBlock(pPos, this.getStateForAge(nextAge-TOP_MAX_AGE), 2);
-        }
+    }
+
+    @Override
+    protected int getBonemealAgeIncrease(Level pLevel) {
+        return Mth.nextInt(pLevel.random, 1, 2);
     }
 
     @Override
@@ -107,7 +112,7 @@ public class IndicaCannabisCropBlock extends CropBlock {
     }
 
     @Override
-    protected IntegerProperty getAgeProperty() {
+    public IntegerProperty getAgeProperty() {
         return AGE;
     }
 
